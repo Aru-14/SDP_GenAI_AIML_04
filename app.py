@@ -6,10 +6,7 @@ from google.genai import Client
 import sys
 import os
 
-# Manually add the User site-packages to the path
-user_site = r"C:\Users\ARUNIMA\AppData\Roaming\Python\Python313\site-packages"
-if user_site not in sys.path:
-    sys.path.append(user_site)
+
 
 
 

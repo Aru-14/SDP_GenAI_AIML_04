@@ -2,11 +2,11 @@ import streamlit as st
 import ollama
 import time
 import sys
+from google.genai import Client
 
 # Optional: Keep your path fix if you're still having environment issues
-user_site = r"C:\Users\ARUNIMA\AppData\Roaming\Python\Python313\site-packages"
-if user_site not in sys.path:
-    sys.path.append(user_site)
+API_KEY = "AIzaSyBMOMscNX9vKFwN-m85BQMSXGswbJin4jo"
+client =Client(api_key=API_KEY)
 
 def generate_story(prompt,author):
     if prompt:
@@ -21,13 +21,18 @@ def generate_story(prompt,author):
         
         try:
             # 1. Call your local model (ensure 'gemma2:2b' or 'gemma2' is pulled)
-            response = ollama.chat(
-                model='gemma2:2b', 
-                messages=[{'role': 'user', 'content': f"Give a story inspired by: {author} with given prompt: {prompt}"}]
+            response = client.models.generate_content(
+                model="gemini-2.5-flash", # Use 2.0 or 1.5 (2.5 isn't public yet)
+                contents=f"Give a story inspired by: {author} with given prompt: {prompt}"
             )
+            # response = ollama.chat(
+            #     model='gemma2:2b', 
+            #     messages=[{'role': 'user', 'content': f"Give a story inspired by: {author} with given prompt: {prompt}"}]
+            # )
             
             # 2. Display the output
-            st.markdown(response['message']['content'])
+            # st.markdown(response['message']['content'])
+            st.markdown(response.text)
             
         except Exception as e:
             st.error(f"Ollama Error: {e}. Make sure the Ollama app is running in the background!")
