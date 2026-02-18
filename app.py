@@ -16,7 +16,7 @@ if user_site not in sys.path:
 # # Then initialize like this:
 # client = Client(api_key="AIzaSyBd8UuXOwGOppnY7tyyKaxaSOOamxPRCek")
 # 1. Initialize the client at the top-level so the function can see it
-API_KEY = "AIzaSyBd8UuXOwGOppnY7tyyKaxaSOOamxPRCek"
+API_KEY = "AIzaSyBMOMscNX9vKFwN-m85BQMSXGswbJin4jo"
 client =Client(api_key=API_KEY)
 
 def cook_food(prompt):
@@ -34,7 +34,7 @@ def cook_food(prompt):
         # 2. Call the new SDK method correctly
         try:
             response = client.models.generate_content(
-                model="gemini-2.0-flash", # Use 2.0 or 1.5 (2.5 isn't public yet)
+                model="gemini-2.5-flash", # Use 2.0 or 1.5 (2.5 isn't public yet)
                 contents=f"Write a summarized recipe for: {prompt}"
             )
             st.markdown(response.text)
